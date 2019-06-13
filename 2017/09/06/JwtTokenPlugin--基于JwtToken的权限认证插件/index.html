@@ -3,188 +3,28 @@
 <p>地址:<a href="https://git.oschina.net/Danjinsong/JFinal-JwtTokenPlugin.git" target="_blank" rel="noopener">https://git.oschina.net/Danjinsong/JFinal-JwtTokenPlugin.git</a></p>
 <p>使用方法 :</p>
 <p>添加插件</p>
-<pre><code>@Override
-public void configPlugin(Plugins me) {
-    me.add(new JwtTokenPlugin(UserService.me));                                /**配置权限拦截插件*/
-}</code></pre><p>让Model实现IJwtAble接口</p>
-<pre><code>/**
- * 我有故事，你有酒么？
- * JKhaled created by yunqisong@foxmail.com 2017/9/5
- * FOR : 简单实现
- */
-public class User implements IJwtAble {
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void configPlugin(Plugins me) &#123;</span><br><span class="line">    me.add(new JwtTokenPlugin(UserService.me));                                /**配置权限拦截插件*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    private String userName;
+<p>让Model实现IJwtAble接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 我有故事，你有酒么？</span><br><span class="line"> * JKhaled created by yunqisong@foxmail.com 2017/9/5</span><br><span class="line"> * FOR : 简单实现</span><br><span class="line"> */</span><br><span class="line">public class User implements IJwtAble &#123;</span><br><span class="line"> </span><br><span class="line">    private String userName;</span><br><span class="line"> </span><br><span class="line">    private String password;</span><br><span class="line"> </span><br><span class="line">    private List&lt;String&gt; _roles;</span><br><span class="line"> </span><br><span class="line">    private List&lt;String&gt; _forces;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 当前用户的角色</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;String&gt; getRoles() &#123;</span><br><span class="line">        // 使用的时候写通过数据库查询返回给插件一个角色集合</span><br><span class="line">        return get_roles();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 当前用户的权限</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;String&gt; getForces() &#123;</span><br><span class="line">        // 使用的时候写通过数据库查询返回给插件一个角色集合</span><br><span class="line">        return get_forces();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 上次修改密码时间</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public Date getLastModifyPasswordTime() &#123;</span><br><span class="line"> </span><br><span class="line">        return new Date(System.currentTimeMillis() - 60L * 1000L * 60L * 24);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return userName;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public User setUserName(String userName) &#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public User setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public User setRoles(List&lt;String&gt; roles) &#123;</span><br><span class="line">        this._roles = roles;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public User setForces(List&lt;String&gt; forces) &#123;</span><br><span class="line">        this._forces = forces;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public List&lt;String&gt; get_roles() &#123;</span><br><span class="line">        return _roles;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public List&lt;String&gt; get_forces() &#123;</span><br><span class="line">        return _forces;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    private String password;
+<p>让你的Service实现登录接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 我有故事，你有酒么？</span><br><span class="line"> * JKhaled created by yunqisong@foxmail.com 2017/9/5</span><br><span class="line"> * FOR : 简单实现</span><br><span class="line"> */</span><br><span class="line">public class UserService implements IJwtUserService &#123;</span><br><span class="line">    public static final UserService me = new UserService();</span><br><span class="line"> </span><br><span class="line">    private UserService() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    private static Kv store = Kv.create();</span><br><span class="line"> </span><br><span class="line">    static &#123;</span><br><span class="line">        store.set(&quot;admin&quot;,</span><br><span class="line">                new User().setForces(Arrays.asList(&quot;登录后台&quot;, &quot;管理用户&quot;))</span><br><span class="line">                        .setRoles(Arrays.asList(&quot;管理员&quot;, &quot;普通用户&quot;)).setUserName(&quot;admin&quot;).setPassword(&quot;123456&quot;)</span><br><span class="line">        ).set(&quot;user&quot;,</span><br><span class="line">                new User().setForces(Arrays.asList(&quot;前台登录&quot;, &quot;发布文章&quot;))</span><br><span class="line">                        .setRoles(Arrays.asList(&quot;普通用户&quot;)).setUserName(&quot;user&quot;).setPassword(&quot;123456&quot;)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    public IJwtAble login(String userName, String password) &#123;</span><br><span class="line">        User user = (User) store.get(userName);// 假装登录验证</span><br><span class="line">        if (user != null)</span><br><span class="line">            return user;</span><br><span class="line">        throw new RuntimeException(&quot;找不到用户&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    private List&lt;String&gt; _roles;
+<p>通过登录拿Token</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void login() &#123;</span><br><span class="line"></span><br><span class="line">    User user = getBean(User.class, &quot;&quot;);</span><br><span class="line">    String token = JwtKit.getToken(user.getUserName(), user.getPassword());</span><br><span class="line">    renderJson(Ret.by(&quot;token&quot;, token));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    private List&lt;String&gt; _forces;
-
-    /**
-     * 当前用户的角色
-     *
-     * @return
-     */
-    @Override
-    public List&lt;String&gt; getRoles() {
-        // 使用的时候写通过数据库查询返回给插件一个角色集合
-        return get_roles();
-    }
-
-    /**
-     * 当前用户的权限
-     *
-     * @return
-     */
-    @Override
-    public List&lt;String&gt; getForces() {
-        // 使用的时候写通过数据库查询返回给插件一个角色集合
-        return get_forces();
-    }
-
-    /**
-     * 上次修改密码时间
-     *
-     * @return
-     */
-    @Override
-    public Date getLastModifyPasswordTime() {
-
-        return new Date(System.currentTimeMillis() - 60L * 1000L * 60L * 24);
-    }
-
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public User setUserName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public User setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public User setRoles(List&lt;String&gt; roles) {
-        this._roles = roles;
-        return this;
-    }
-
-    public User setForces(List&lt;String&gt; forces) {
-        this._forces = forces;
-        return this;
-    }
-
-    public List&lt;String&gt; get_roles() {
-        return _roles;
-    }
-
-    public List&lt;String&gt; get_forces() {
-        return _forces;
-    }
-}</code></pre><p>让你的Service实现登录接口</p>
-<pre><code>/**
- * 我有故事，你有酒么？
- * JKhaled created by yunqisong@foxmail.com 2017/9/5
- * FOR : 简单实现
- */
-public class UserService implements IJwtUserService {
-    public static final UserService me = new UserService();
-
-    private UserService() {
-    }
-
-    private static Kv store = Kv.create();
-
-    static {
-        store.set(&quot;admin&quot;,
-                new User().setForces(Arrays.asList(&quot;登录后台&quot;, &quot;管理用户&quot;))
-                        .setRoles(Arrays.asList(&quot;管理员&quot;, &quot;普通用户&quot;)).setUserName(&quot;admin&quot;).setPassword(&quot;123456&quot;)
-        ).set(&quot;user&quot;,
-                new User().setForces(Arrays.asList(&quot;前台登录&quot;, &quot;发布文章&quot;))
-                        .setRoles(Arrays.asList(&quot;普通用户&quot;)).setUserName(&quot;user&quot;).setPassword(&quot;123456&quot;)
-        );
-    }
-
-    @Override
-    public IJwtAble login(String userName, String password) {
-        User user = (User) store.get(userName);// 假装登录验证
-        if (user != null)
-            return user;
-        throw new RuntimeException(&quot;找不到用户&quot;);
-    }
-}</code></pre><p>通过登录拿Token</p>
-<pre><code>public void login() {
-
-    User user = getBean(User.class, &quot;&quot;);
-    String token = JwtKit.getToken(user.getUserName(), user.getPassword());
-    renderJson(Ret.by(&quot;token&quot;, token));
-}</code></pre><p><img src="https://www.jfinal.com/upload/img/share/0/50736_20170905221016.png" alt="image"></p>
+<p><img src="https://www.jfinal.com/upload/img/share/0/50736_20170905221016.png" alt="image"></p>
 <p>验证==</p>
 <p>没有登录</p>
 <p><img src="https://www.jfinal.com/upload/img/share/0/50736_20170905221310.png" alt="image"></p>
 <p><img src="https://www.jfinal.com/upload/img/share/0/50736_20170905221310.png" alt="image"></p>
 <p>通过验证的。</p>
 <p>权限验证代码如下</p>
-<pre><code>/**
- * 我有故事，你有酒么？
- * JKhaled created by yunqisong@foxmail.com 2017/9/5
- * FOR : 简单实现
- */
-public class UserController extends Controller {
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 我有故事，你有酒么？</span><br><span class="line"> * JKhaled created by yunqisong@foxmail.com 2017/9/5</span><br><span class="line"> * FOR : 简单实现</span><br><span class="line"> */</span><br><span class="line">public class UserController extends Controller &#123;</span><br><span class="line"> </span><br><span class="line">    public void login() &#123;</span><br><span class="line">        User user = getBean(User.class, &quot;&quot;);</span><br><span class="line">        String token = JwtKit.getToken(user.getUserName(), user.getPassword());</span><br><span class="line">        renderJson(Ret.by(&quot;token&quot;, token));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // 登录认证</span><br><span class="line">    @Before(JwtTokenInterceptor.class)</span><br><span class="line">    public void testLogin() &#123;</span><br><span class="line">        renderJson(Ret.ok());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Auth(hasRoles = &#123;&quot;管理员&quot;&#125;)</span><br><span class="line">    public void testHasRole() &#123;</span><br><span class="line">        renderJson(Ret.ok());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Auth(hasForces = &#123;&quot;登录后台&quot;&#125;)</span><br><span class="line">    public void testHasForce() &#123;</span><br><span class="line">        renderJson(Ret.ok());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Auth(withRoles = &#123;&quot;管理员&quot;, &quot;普通用户&quot;&#125;)</span><br><span class="line">    public void testWithRoles() &#123;</span><br><span class="line">        renderJson(Ret.ok());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Auth(withForces = &#123;&quot;登录后台&quot;, &quot;管理用户&quot;&#125;)</span><br><span class="line">    public void testWithForces() &#123;</span><br><span class="line">        renderJson(Ret.ok());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    public void login() {
-        User user = getBean(User.class, &quot;&quot;);
-        String token = JwtKit.getToken(user.getUserName(), user.getPassword());
-        renderJson(Ret.by(&quot;token&quot;, token));
-    }
+<p>注解说明:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public @interface Auth &#123;</span><br><span class="line"></span><br><span class="line">         String[] hasForces() default &#123;&#125;;               // 需要的权限 满足一个就可以访问--优先级第三</span><br><span class="line"></span><br><span class="line">         String[] hasRoles() default &#123;&#125;;                // 满足的角色 满足一个就可以访问--优先级第四</span><br><span class="line"></span><br><span class="line">         String[] withForces() default &#123;&#125;;              // 需要的权限 满足全部才可以访问--优先级第一</span><br><span class="line"></span><br><span class="line">         String[] withRoles()  default &#123;&#125;;              // 满足的橘色 满足全部才可以访问--优先级第二</span><br><span class="line"></span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
 
-    // 登录认证
-    @Before(JwtTokenInterceptor.class)
-    public void testLogin() {
-        renderJson(Ret.ok());
-    }
-
-    @Auth(hasRoles = {&quot;管理员&quot;})
-    public void testHasRole() {
-        renderJson(Ret.ok());
-    }
-
-    @Auth(hasForces = {&quot;登录后台&quot;})
-    public void testHasForce() {
-        renderJson(Ret.ok());
-    }
-
-    @Auth(withRoles = {&quot;管理员&quot;, &quot;普通用户&quot;})
-    public void testWithRoles() {
-        renderJson(Ret.ok());
-    }
-
-    @Auth(withForces = {&quot;登录后台&quot;, &quot;管理用户&quot;})
-    public void testWithForces() {
-        renderJson(Ret.ok());
-    }
-
-}</code></pre><p>注解说明:</p>
-<pre><code>public @interface Auth {
-
-    String[] hasForces() default {};               // 需要的权限 满足一个就可以访问--优先级第三
-
-    String[] hasRoles() default {};                // 满足的角色 满足一个就可以访问--优先级第四
-
-    String[] withForces() default {};              // 需要的权限 满足全部才可以访问--优先级第一
-
-    String[] withRoles()  default {};              // 满足的橘色 满足全部才可以访问--优先级第二
-
-}</code></pre><p>Auth注解适用于方法和类，注意:方法上的注解会覆盖掉类上的权限注解。欢迎大家测试，使用</p>
-</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-09-06</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Jfinal-Java-早期其他平台博客/" title="Jfinal Java 早期其他平台博客">Jfinal Java 早期其他平台博客 </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yunqisong.gitbub.com/2017/09/06/JwtTokenPlugin--基于JwtToken的权限认证插件/,雲栖鬆的博客,JwtTokenPlugin--基于JwtToken的权限认证插件,;"></a></div></div><div class="pagination"><ul class="clearfix"></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
+<p>Auth注解适用于方法和类，注意:方法上的注解会覆盖掉类上的权限注解。欢迎大家测试，使用</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-09-06</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Jfinal-Java-早期其他平台博客/" title="Jfinal Java 早期其他平台博客">Jfinal Java 早期其他平台博客 </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yunqisong.gitbub.com/2017/09/06/JwtTokenPlugin--基于JwtToken的权限认证插件/,雲栖鬆的博客,JwtTokenPlugin--基于JwtToken的权限认证插件,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2019/06/13/JFinal-中如何正确使用-Jetty9的姿势/" title="JFinal 中如何正确使用 Jetty9的姿势">上一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
